@@ -245,21 +245,31 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
 
 
 
+        ######
     ######
-    ######        
     #
     elif player == 6:
+        logic = 'normal'
         if getting_team_name:
-            return 'loyal vengeful'
+            return 'WOPR'
         else:
-            # use history, opponent_history, score, opponent_score
-            # to compute your strategy
-            if len(opponent_history)==0: #It's the first round: collude
-                return 'c'
-            elif history[-1]=='c' and opponent_history[-1]=='b':
-                return 'b' # betray is they were severely punished last time
+            if len(opponent_history)==0: 
+                return 'b'
+
+            
+            elif len(opponent_history)>=3 and opponent_history[-1]=='b' and opponent_history[-2]=='b' and opponent_history[-3]=='b':
+                return'C'
+            elif len(opponent_history)>=3 and opponent_history[-1]=='c' and opponent_history[-2]=='c' and opponent_history[-3]=='c':
+                return'b'
+            elif logic =='attack':
+               return 'b'
+            elif history[-1]=='c' and opponent_history[-1]=='c':
+                return 'b'
+            elif opponent_history[-1]=='b':
+                logic = 'attack'
+                return'b'
             else:
-                return 'c' #otherwise collude
+                return'C'
     
 
 
@@ -581,6 +591,100 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
                 return 'b' #otherwise collude
     
     
+       ######
+######
+#
+       ######
+######
+#
+    elif player == 30:
+        logic = 'weird'
+        if getting_team_name:
+            return 'Epsilon'
+        else:
+            
+            if len(opponent_history)>20:
+                last_10 = '', opponent_history[-1], opponent_history[-2], opponent_history[-3], opponent_history[-4], opponent_history[-5], opponent_history[-6], opponent_history[-7], opponent_history[-8], opponent_history[-9], opponent_history[-10]
+                last_20 = '', opponent_history[-11], opponent_history[-12], opponent_history[-13], opponent_history[-14], opponent_history[-15], opponent_history[-16], opponent_history[-17], opponent_history[-18], opponent_history[-19], opponent_history[-20]
+                if last_10 == last_20:
+                    if opponent_history[-12] =='b':
+                        return 'b'
+                    if opponent_history[-12] == 'c':
+                        return 'c'
+            
+            elif len(opponent_history)>18:
+                last_9 = '', opponent_history[-1], opponent_history[-2], opponent_history[-3], opponent_history[-4], opponent_history[-5], opponent_history[-6], opponent_history[-7], opponent_history[-8], opponent_history[-9], 
+                last_18 = '', opponent_history[-10], opponent_history[-11], opponent_history[-12], opponent_history[-13], opponent_history[-14], opponent_history[-15], opponent_history[-16], opponent_history[-17], opponent_history[-18]
+                if last_9 == last_18:
+                    if opponent_history[-11] =='b':
+                        return 'b'
+                    if opponent_history[-11] == 'c':
+                        return 'c'
+            
+            elif len(opponent_history)>16:
+                last_8 = '', opponent_history[-1], opponent_history[-2], opponent_history[-3], opponent_history[-4], opponent_history[-5], opponent_history[-6], opponent_history[-7], opponent_history[-8]
+                last_16 = '',opponent_history[-9], opponent_history[-10], opponent_history[-11], opponent_history[-12], opponent_history[-13], opponent_history[-14], opponent_history[-15], opponent_history[-16]
+                if last_8 == last_16:
+                    if opponent_history[-10] =='b':
+                        return 'b'
+                    if opponent_history[-10] == 'c':
+                        return 'c'
+            
+            elif len(opponent_history)>14:
+                last_7 = '', opponent_history[-1], opponent_history[-2], opponent_history[-3], opponent_history[-4], opponent_history[-5], opponent_history[-6], opponent_history[-7]
+                last_14 = '', opponent_history[-8], opponent_history[-9], opponent_history[-10], opponent_history[-11], opponent_history[-12], opponent_history[-13], opponent_history[-14]
+                if last_7 == last_14:
+                    if opponent_history[-9] =='b':
+                        return 'b'
+                    if opponent_history[-9] == 'c':
+                        return 'c'
+            
+            elif len(opponent_history)>12:
+                last_6 = '', opponent_history[-1], opponent_history[-2], opponent_history[-3], opponent_history[-4], opponent_history[-5], opponent_history[-6]
+                last_12 = '', opponent_history[-7], opponent_history[-8], opponent_history[-9], opponent_history[-10], opponent_history[-11], opponent_history[-12]
+                if last_6 == last_12:
+                    if opponent_history[-8] =='b':
+                        return 'b'
+                    if opponent_history[-8] == 'c':
+                        return 'c'
+            
+            
+            elif len(opponent_history)>10:
+                last_5 = '', opponent_history[-1], opponent_history[-2], opponent_history[-3], opponent_history[-4], opponent_history[-5]
+                last_10 = '', opponent_history[-6], opponent_history[-7], opponent_history[-8], opponent_history[-9], opponent_history[-10]
+                if last_5 == last_10:
+                    if opponent_history[-7] =='b':
+                        return 'b'
+                    if opponent_history[-7] == 'c':
+                        return 'c'
+            
+            
+            
+            elif len(opponent_history)>8:
+                last_4 = '', opponent_history[-1], opponent_history[-2], opponent_history[-3], opponent_history[-4]
+                last_8 = '', opponent_history[-5], opponent_history[-6], opponent_history[-7], opponent_history[-8]
+                if last_4 == last_8:
+                    if opponent_history[-6] =='b':
+                        return 'b'
+                    if opponent_history[-6] == 'c':
+                        return 'c'
+                
+                            
+                        
+            elif len(opponent_history)>6:
+                last_3 = '', opponent_history[-1], opponent_history[-2], opponent_history[-3]
+                last_6 = '', opponent_history[-4], opponent_history[-5], opponent_history[-6]
+                if last_3 == last_6:
+                    if opponent_history[-5] =='b':
+                        return 'b'
+                    if opponent_history[-5] == 'c':
+                        return 'c'
+                           
+            elif len(opponent_history)>1 and (history[-1]=='b' or opponent_history[-1]=='b'):
+                return 'b'
+            
+            else:
+                return 'c'
 
 
 
