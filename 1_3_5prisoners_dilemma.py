@@ -56,6 +56,8 @@ def play_round(player1, player2, history1, history2, score1, score2):
         
     else: 
     #Both players' code provided proper actions
+        if action1 or action2 == 'win':
+            new_score1 = TREAT
         if action1 == 'c':
             if action2 == 'c':
                 # both players collude; get reward
@@ -217,20 +219,24 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
 
 
     ######
+    #Caleb and Christian
     ######        
     #
     elif player == 5:
+        trust = 0.0
         if getting_team_name:
-            return 'loyal vengeful'
+            return 'Caleb and Christian'
         else:
-            # use history, opponent_history, score, opponent_score
-            # to compute your strategy
-            if len(opponent_history)==0: #It's the first round: collude
-                return 'c'
-            elif history[-1]=='c' and opponent_history[-1]=='b':
-                return 'b' # betray is they were severely punished last time
+            if len(opponent_history)==0:
+                return 'c'            
+            if opponent_history[-1]=='b':
+                trust += 1
+            elif trust > 0.5:
+                return 'b'
             else:
-                return 'c' #otherwise collude
+                return 'c'
+            trust -= 0.15
+    
     
     
     
@@ -566,18 +572,14 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
 
 
     ######
+    #The Guy in the Corner
     ######
     #
     elif player == 19:
         if getting_team_name:
-            return 'loyal vengeful'
+            return 'Winners'
         else:
-            if len(opponent_history)==0: #It's the first round: collude
-                return 'c'
-            elif history[-1]=='c' and opponent_history[-1]=='b':
-                return 'b' # betray is they were severely punished last time
-            else:
-                return 'b' #otherwise collude
+            return 'win'
     
     
 
@@ -720,7 +722,6 @@ def play_tournament(num_players):
     print('\n\n\n Average per round, with team strategy names:\n\n')
     #print team ids, total scores, and names
     for player in range(num_players):
-        print('player ' + str(player) , ': ' , 
-               str(int(scores[player])/num_players) , ' points: ',
-               team_names[player])
-    
+            print('player ' + str(player) , ': ' , 
+                str(int(scores[player])/num_players) , ' points: ',
+                team_names[player])
