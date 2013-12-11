@@ -391,7 +391,7 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
 
     ######
     ######
-    #
+#nathan and saul 
     elif player == 11:
         if getting_team_name:
             return 'loyal vengeful'
@@ -402,9 +402,13 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
                 return 'c'
             elif history[-1]=='c' and opponent_history[-1]=='b':
                 return 'b' # betray is they were severely punished last time
-            else:
-                return 'c' #otherwise collude
+            elif history[-1]=='b' and opponent_history[-1]=='b':
+                return 'b'
+           
 
+
+
+  
 
 
 
