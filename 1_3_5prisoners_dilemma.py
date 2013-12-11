@@ -298,18 +298,21 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
 
 
     ######
+    # Evan & Ben= player 8
     ######        
     #
     elif player == 8:
+      
+            
         if getting_team_name:
             #if there was a previous round just like 
-            return 'loyal vengeful with permanent second impression'
+            return '#winning'
         else:
             # use history, opponent_history, score, opponent_score
             # to compute your strategy      
             if len(opponent_history)==0: #It's the first round: collude
-                return 'c'
-            else:
+                return 'b'
+            #else:
                 # if there was a previous round just like the last one,
                 # do whatever they did in the round that followed it
                 recent_round_opponent = opponent_history[-1]
@@ -328,14 +331,8 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
                     return 'b' # betray is they were severely punished last time
                 else:
                     return 'c' #otherwise collude
-
-
-
-
-
-
-
-
+              
+       
 
 
 
