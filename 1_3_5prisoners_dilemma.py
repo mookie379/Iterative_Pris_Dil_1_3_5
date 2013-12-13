@@ -164,22 +164,27 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
 
 
 
-    ######
+       ######
+       # Kyle and Hunter
     ######
     #   
     #This example player is silent at first and then 
     #only betrays if they were a sucker last round.
     elif player == 2:
         if getting_team_name:
-            return 'loyal vengeful'
+            return 'loyal with grugde'
         else:
             if len(opponent_history)==0: #It's the first round: collude
                 return 'c'
             elif history[-1]=='c' and opponent_history[-1]=='b':
                 return 'b' # betray if they were severely punished last time
+            if len(history) >=2:  
+                if opponent_history[-2]==b:
+                    return 'b' # betray if they were btrayed two times before
+                else:
+                    return 'c'
             else:
                 return 'c' #otherwise collude
-
 
     
     
@@ -197,7 +202,7 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
 
 
     ######
-    Nate, Ryan, Noah
+    #Nate, Ryan, Noah
     ######
     #
     elif player == 3:
